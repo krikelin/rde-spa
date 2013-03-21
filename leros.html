@@ -2,8 +2,8 @@
   <title>leros</title>
   <style type="text/css">
     body {
-      background: url('/texturetastic_gray.png');
-      
+     /* background: url('/texturetastic_gray.png');
+      */
     }
     * {
       font-family: 'Tahoma' !important;
@@ -33,17 +33,18 @@
         </div>
       </div>
   </nav>
-  <main class="container-fluid">
+  <div class="container-fluid">
     <div class="row-fluid">
-      <div class="hero-unit">
-        a
+      <div class="span4 well">
       </div>
-      <div id="lockoutsList">
-        {{>lockouts}}
-        
+      <div class="span8">
+        <div id="lockoutsList">
+          {{>lockouts}}
+          
+        </div>  
       </div>
     </div>
-  </main>
+  </div>
 </body>
 
 <template name="page">
@@ -51,13 +52,16 @@
 </template>
 
 <template name="lockouts">
+  <h1>My Lockouts</h1>
   <table class="table table-bordered table-striped table-condensed">
     <thead>   
-       <th>
-          <td></td>
-          <td>Start date</td>
-          <td>End date</td>
-      </th>
+       <tr>
+          <th></th>
+          <th>Start date</th>
+          <th>End date</th>
+          <th>Delete</th>
+          <th></th>
+      </tr>
     </thead>
     <tbody>
   {{#each lockouts}}
@@ -65,13 +69,15 @@
       <td></td>
       <td>{{startDate}}</td>
       <td>{{endDate}}</td>
+      <td><button class="btn btn-danger delete" id="{{_id}}">Delete</button></td>
+      <td></td>
     </tr>
   {{/each}}
     </tbody>
   </table>
   <div id="addLockout">
-    <input id="startDate" type="datetime" placeholder="Start Date" />
-    <input id="endDate" type="datetime" placeholder="End Date" />
+    <input id="startDate" type="datetime" value="2013-03-27" placeholder="Start Date" />
+    <input id="endDate" type="datetime" value="2013-04-03" placeholder="End Date" />
     <button id="submit" class="btn btn-primary">Add</button>
   </div>
 </template>

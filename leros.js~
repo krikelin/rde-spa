@@ -1,20 +1,8 @@
 var lockouts = new Meteor.Collection('Lockouts');
 if (Meteor.isClient) {
 
-  
-
-  
 }
 
 if (Meteor.isServer) {
-  Meteor.methods({
-    'addLockout': function (data) {
-      console.log(data);
-      
-    }
-  });
-  Meteor.startup(function () {
-    
-    // code to run on server at startup
-  });
+  
 }
