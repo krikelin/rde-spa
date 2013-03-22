@@ -1,105 +1,6 @@
 <head>
   <title>leros</title>
-  
-  <styled style="display: none" type="text/css">
-    
-    body {
-     /* background: url('/texturetastic_gray.png');
-      */
-      color: #444444;
-      margin: 0px;
-    }
-    a {
-      color: #0077ff;
-      text-decoration: none;
-    }
-    .header {
-      height: 60px;
-      background: #444444;
-      color: #FFFFFF;
-    }
-    .navbar a {
-      color: #FFFFFF;
-    }
-    .nav {
-      width: 100%;
-      border-bottom: 1px solid #aaa;
-      height: 30px;
-    }
-    .nav li {
-      float: left;
-      list-style: none;
-      padding: 5px;
-      padding-left: 12px;
-      padding-right: 12px;
-      margin: 3px;
-      border-radius: 12px;
-    } 
-    .nav li a {
-      color: #888;
-    }
-    .nav li:hover {
-      background-color: #dddddd;
-    }
-    .nav li.active a {
-      color: #FFFFFF;
-    }
-    .nav li.active {
-      background-color: #ff8800;
-      color:#ffffff;
-    }
-    label, input, button {
-      display: block;
-    }
-    .section { display: none }
-    body {
-      font-family: 'Tahoma';
-      font-size: 11px;
-    }
-    .span12 {
-      
-      width: 100%;
-    }
-    .span8 {
-      width: 60%;
-    } 
-    .span6 {
-      width: 50%;
-    }
-    .table-striped tr:nth-child(2n) td {
-      background-color: #EEEEEE;
-    }
-    table {
-      width: 100%;
-    }
-    .btn {
-      border-radius: 10px;
-      border: 1px solid #888888;
-      background: #e0e0e0; /* Old browsers */
-background: -moz-linear-gradient(top, #e0e0e0 0%, #b7b7b7 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e0e0e0), color-stop(100%,#b7b7b7)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, #e0e0e0 0%,#b7b7b7 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, #e0e0e0 0%,#b7b7b7 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, #e0e0e0 0%,#b7b7b7 100%); /* IE10+ */
-background: linear-gradient(to bottom, #e0e0e0 0%,#b7b7b7 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', endColorstr='#b7b7b7',GradientType=0 ); /* IE6-9 */
-      box-shadow: 0px 2px 3px #000;
-      text-shadow: 0px 2px 0px #eeeeee;
-    }
-  </styled>
-  <style type="text/css">
-    input, label, button {
-      display: block;
-      font-size: 11px !important;
-      padding:2px;
-    }
-    * { 
-      font-family: "Tahoma";
-    }
-    body {
-      font-size: 11px;
-    }
-  </style>
+  <link rel="stylesheet" href="/bootstrap.css" type="text/css" />
 </head>
 
 <body>
@@ -109,7 +10,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
     <div class="navbar-inner">
       <div class="container-fluid">
         <a class="brand" href="#">Leros</a>
-        <ul class="nav">
+       <!-- <ul class="nav">
             <li data-item="home" class="active"><a href="#!/home">Home</a></li>
            
             <li><a href="#!/home">Home</a></li>
@@ -154,6 +55,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
       </div>
     </div>
   </div>
+  <footer class="footer">
+     <center>&copy; 2013 Alexander Forselius</center>
+  </footer>
 </body>
 
 <template name="page">
@@ -177,7 +81,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
             <th>Title</th>
             <th>Price</th>
             <th>Securelink</th>
-            <th>Action</th>
             <th></th>
         </tr>
       </thead>
@@ -189,14 +92,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
         <td>{{name}}</td>
         <td>{{price}}</td>
         <td><a href="http://leros.meteor.com/#!/promotions/{{code}}/secure">{{code}}</a></td>
-        <td><button class="btn btn-danger delete" id="{{_id}}">Delete</button></td>
-
         <td></td>
       </tr>
     {{/each}}
       </tbody>
     </table>
-    <h2>Secured promotions</h2>
+    <h1>Secured promotions</h1>
     <table id="promotions" class="table table-bordered table-striped table-condensed">
       <thead>   
          <tr>
@@ -204,7 +105,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
             <th>Date secured</th>
             <th>Title</th>
             <th>Price</th>
-            <th>Action</th>
             <th></th>
         </tr>
       </thead>
@@ -215,14 +115,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
         <td>{{promotionDate}}</td>
         <td>{{name}}</td>
         <td>{{price}}</td>
-        <td><button class="btn btn-danger delete-p" id="{{_id}}">Delete</button></td>
+     <!--   <td><button class="btn btn-danger delete-p" id="{{_id}}">Delete</button></td> -->
         <td></td>
       </tr>
     {{/each}}
       </tbody>
     </table>
 
-    <h2>Rejected promotions</h2>
+    <h1>Rejected promotions</h1>
     <table id="promotions" class="table table-bordered table-striped table-condensed">
       <thead>   
          <tr>
@@ -241,21 +141,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
         <td>{{promotionDate}}</td>
         <td>{{name}}</td>
         <td>{{price}}</td>
-        <td><button class="btn btn-danger delete-p" id="{{_id}}">Delete</button></td>
+     <!--   <td><button class="btn btn-danger delete-p" id="{{_id}}">Delete</button></td> -->
         <td></td>
       </tr>
     {{/each}}
       </tbody>
     </table>
   </div>
-<div class="span3" id="addPromotion">
+<div class="span3 well" id="addPromotion">
   <h3>Add promotion</h3>
-  <input type="text" id="name" value="Spotify blog promotion" placeholder="Name of promotional activity" />
-  <input type="text" id="description" value="Spotify blog promotion" placeholder="Description" />
-  <input type="text" id="price" value="0" type="number" placeholder="price" /><br />
-  <input type="text" id="submissionDate" value="2013-04-01" placeholder="Leave blank to enter now" /><br />
-  <input type="text" id="promotionDate" placeholder="Leave blank to enter null" /><br />
-  <input type="text" id="code" value="spotifyblog" placeholder="Refererrer code" /><br />
+  <label for="name">Name</label>
+  <input type="text" id="name" value="Spotify blog promotion" />
+  <label for="description">Description</label>
+  <input type="text" id="description"placeholder="Description" />
+  <label for="price">Price</label>
+  <input type="text" id="price" value="0" type="number"/>
+  <label for="submissionDate">Submission date</label>
+  <input type="text" id="submissionDate" value="2013-04-01"/>
+  <label for="promotionDate">Promotion date</label>
+  <input type="text" id="promotionDate"/>
+  <label for="code">Coupon code</label>
+  <input type="text" id="code" value="spotifyblog" /><br />
 
   <button id="submit" class="btn btn-primary">Add</button>
 </div>

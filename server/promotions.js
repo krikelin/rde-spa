@@ -37,7 +37,8 @@ Meteor.methods({
     Email.send({
       from: 'noreply@leros.meteor.com',
       to: email,
-      subject: data.code + ' promotion is now secured'
+      subject: data.code + ' promotion is now secured',
+      text: 'Contugratelations! Your promotion ' + data.code + ' is now secured and is on way to delivery!'
     });
     
   },
@@ -50,7 +51,8 @@ Meteor.methods({
     Email.send({
       from: 'noreply@leros.meteor.com',
       to: email,
-      subject: 'We\'re sorry that promotion ' + data.code + 'has been rejected.'
+      subject: 'We\'re sorry that promotion ' + data.code + 'has been rejected.',
+      text: 'We are sad to say that your promotion proposal ' + data.code + ' could not be secured.'
     });
     
   },

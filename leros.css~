@@ -85,9 +85,6 @@ table {
   *border: 1px solid #888888;
   border: none;
   padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-
   cursor: default;
     border-image: -webkit-linear-gradient(90deg, #888 50%, #ff 100%) 15%;
   background: #e0e0e0; /* Old browsers */
