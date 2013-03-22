@@ -5,7 +5,6 @@
 
 insecure
 preserve-inputs
-bootstrap
 backbone
 router
 accounts-ui
@@ -13,3 +12,4 @@ appcache
 accounts-base
 accounts-password
 email
+bootstrap

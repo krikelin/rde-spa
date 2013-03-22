@@ -2,6 +2,7 @@ var lockouts = new Meteor.Collection('Lockouts');
 
 function setSection(id) {
   var d = document.querySelectorAll('.section');
+  // alert(id);
   console.log(d.length);
   for(var i = 0; i < d.length; i++) {
     console.log(d[i]);
@@ -11,7 +12,7 @@ function setSection(id) {
       d[i].style.display = 'none';
     }
   }
-  var items = document.querySelectorAll('.navbar li');
+  var items = document.querySelectorAll('.nav li');
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
     if(item.dataset['item'] == id) {
@@ -24,13 +25,17 @@ function setSection(id) {
 var LerosRoutes = Backbone.Router.extend({
   routes: {
     '' : 'home',
-    '*lockouts' : 'lockouts'
+    '!/lockouts' : 'lockouts',
+    '!/promotions' : 'promotions'
   },
   home: function () {
     setSection('home');
   },
   lockouts: function () {
     setSection('lockouts');
+  },
+  promotions: function () {
+    setSection('promotions');
   }
 });
 var routers = new LerosRoutes();

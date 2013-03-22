@@ -1,14 +1,101 @@
 <head>
   <title>leros</title>
-  <style type="text/css">
+  
+  <styled style="display: none" type="text/css">
+    
     body {
      /* background: url('/texturetastic_gray.png');
       */
+      color: #444444;
+      margin: 0px;
+    }
+    a {
+      color: #0077ff;
+      text-decoration: none;
+    }
+    .header {
+      height: 60px;
+      background: #444444;
+      color: #FFFFFF;
+    }
+    .navbar a {
+      color: #FFFFFF;
+    }
+    .nav {
+      width: 100%;
+      border-bottom: 1px solid #aaa;
+      height: 30px;
+    }
+    .nav li {
+      float: left;
+      list-style: none;
+      padding: 5px;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin: 3px;
+      border-radius: 12px;
+    } 
+    .nav li a {
+      color: #888;
+    }
+    .nav li:hover {
+      background-color: #dddddd;
+    }
+    .nav li.active a {
+      color: #FFFFFF;
+    }
+    .nav li.active {
+      background-color: #ff8800;
+      color:#ffffff;
+    }
+    label, input, button {
+      display: block;
     }
     .section { display: none }
-    * {
-      font-family: 'Tahoma' !important;
-      font-size: 11px !important;
+    body {
+      font-family: 'Tahoma';
+      font-size: 11px;
+    }
+    .span12 {
+      
+      width: 100%;
+    }
+    .span8 {
+      width: 60%;
+    } 
+    .span6 {
+      width: 50%;
+    }
+    .table-striped tr:nth-child(2n) td {
+      background-color: #EEEEEE;
+    }
+    table {
+      width: 100%;
+    }
+    .btn {
+      border-radius: 10px;
+      border: 1px solid #888888;
+      background: #e0e0e0; /* Old browsers */
+background: -moz-linear-gradient(top, #e0e0e0 0%, #b7b7b7 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e0e0e0), color-stop(100%,#b7b7b7)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #e0e0e0 0%,#b7b7b7 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #e0e0e0 0%,#b7b7b7 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #e0e0e0 0%,#b7b7b7 100%); /* IE10+ */
+background: linear-gradient(to bottom, #e0e0e0 0%,#b7b7b7 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', endColorstr='#b7b7b7',GradientType=0 ); /* IE6-9 */
+      box-shadow: 0px 2px 3px #000;
+      text-shadow: 0px 2px 0px #eeeeee;
+    }
+  </styled>
+  <style type="text/css">
+    input, label, button {
+      display: block;
+    }
+    * { 
+      font-family: "Tahoma";
+    }
+    body {
+      font-size: 11px;
     }
   </style>
 </head>
@@ -20,29 +107,35 @@
     <div class="navbar-inner">
       <div class="container-fluid">
         <a class="brand" href="#">Leros</a>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <li data-item="home"><a href="#"><i class="icon-home icon-white"></i> Home</a></li>
-            <li data-item="lockouts"><a href="#lockouts">Lockouts</a></li>
-            
+        <ul class="nav">
+            <li data-item="home" class="active"><a href="#!/home"><i class="icon-home icon-white"></i> Home</a></li>
+            <li data-item="lockouts"><a href="#!/lockouts">Lockouts</a></li>
+            <li data-item="promotions"><a href="#!/promotions">Promotions</a></li>
+            <li>{{loginButtons align="right"}}</li>
           </ul>
-          <form class="navbar-search pull-right" action="">
+       <!--   <form class="navbar-search pull-right" action="">
             <input type="text" class="search-query span2" placeholder="Search">
-          </form>
+          </form>-->
           <div class="pull-right">
-            {{loginButtons align="right"}}
+            
           </div>
+        <div class="nav-collapse">
+          
         </div>
       </div>
   </nav>
+ 
+    
   <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span8">
-        <div id="home" class="hero-unit section">
+        <div id="home" class="row-fluid section">
           <h1>Welcome!</h1>
         </div>
-        <div id="lockouts" class="section">
+        <div id="lockouts" class="row-fluid section">
           {{>lockouts}}
+          
+        </div>  
+        <div id="promotions" class="row-fluid section">
+          {{>promotions}}
           
         </div>  
       </div>
@@ -53,7 +146,69 @@
 <template name="page">
   {{msg}}
 </template>
+<template name="promotions">
+  <div class="span8">
+  <h1>Submissions</h1>
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>   
+         <tr>
+            <th></th>
+            <th>Submission date</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    {{#each submissions}}
+      <tr data-id="{{_id}}">
+        <td></td>
+        <td>{{submissionDate}}</td>
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td><button class="btn btn-success secure" id="{{_id}}">Approved</button></td><td><button class="btn btn-danger delete" id="{{_id}}">Delete</button></td>
+        <td></td>
+      </tr>
+    {{/each}}
+      </tbody>
+    </table>
+    <h2>Secured promotions</h2>
+    <table id="promotions" class="table table-bordered table-striped table-condensed">
+      <thead>   
+         <tr>
+            <th></th>
+            <th>Date secured</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    {{#each promotions}}
+      <tr data-id="{{id}}">
+        <td></td>
+        <td>{{promotionDate}}</td>
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td></td>
+        <td><button class="btn btn-danger delete-p" id="{{_id}}">Delete</button></td>
+        <td></td>
+      </tr>
+    {{/each}}
+      </tbody>
+    </table>
+  </div>
+<div class="span3" id="addPromotion">
+  <h3>Add promotion</h3>
+  <input type="text" id="name" placeholder="Name of promotional activity" />
+  <input type="text" id="description" placeholder="Description" />
+  <input type="text" id="price" type="number" placeholder="price" /><br />
 
+  <button id="submit" class="btn btn-primary">Add</button>
+</div>
+</template>
 <template name="lockouts">
   <h1>My Lockouts</h1>
   <table class="table table-bordered table-striped table-condensed">
@@ -78,9 +233,9 @@
   {{/each}}
     </tbody>
   </table>
-  <div id="addLockout">
+   <div id="addLockout">
     <input id="startDate" type="datetime" value="2013-03-27" placeholder="Start Date" />
     <input id="endDate" type="datetime" value="2013-04-03" placeholder="End Date" />
     <button id="submit" class="btn btn-primary">Add</button>
-  </div>
+  </div> 
 </template>
