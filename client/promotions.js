@@ -1,9 +1,12 @@
 var promotions = new Meteor.Collection('Promotions');
 Template.promotions.submissions = function () {
-    return promotions.find({promotionDate: null}, { sort: {submissionDate: -1}});
+    return promotions.find({promotionDate: null, rejectedDate: null}, { sort: {submissionDate: -1}});
 };
 Template.promotions.promotions = function () {
-    return promotions.find({promotionDate: {$ne: null}}, { sort: {promotionDate: -1}});
+    return promotions.find({promotionDate: {$ne: null}, rejectedDate: null}, { sort: {promotionDate: -1}});
+};
+Template.promotions.rejected = function () {
+    return promotions.find({rejectedDate: {$ne: null}}, { sort: {promotionDate: -1}});
 };
 Template.secure.code = function () {
     return Session.get('code');
@@ -12,6 +15,12 @@ Template.secure.events({
     'click .secure': function (e, t) {
       console.log('a');
       Meteor.call('securePromotion', {
+        code: e.target.id
+      }); 
+    },
+    'click .reject': function (e, t) {
+      console.log('a');
+      Meteor.call('rejectPromotion', {
         code: e.target.id
       }); 
     }

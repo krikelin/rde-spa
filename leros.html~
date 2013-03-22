@@ -162,7 +162,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
 <template name="secure">
   <div class="span8">
     <h1>Secure the opportunity</h3>
-    <button class="btn btn-success secure" id="{{code}}">Secure promotion</button>
+    <button class="btn btn-success secure" id="{{code}}">Secure</button>
+    <button class="btn btn-danger reject" id="{{code}}">Reject</button>
   </div>
 </template>
 <template name="promotions">
@@ -175,6 +176,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
             <th>Submission date</th>
             <th>Title</th>
             <th>Price</th>
+            <th>Securelink</th>
             <th>Action</th>
             <th></th>
         </tr>
@@ -186,7 +188,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
         <td>{{submissionDate}}</td>
         <td>{{name}}</td>
         <td>{{price}}</td>
+        <td><a href="http://leros.meteor.com/#!/promotions/{{code}}/secure">{{code}}</a></td>
         <td><button class="btn btn-danger delete" id="{{_id}}">Delete</button></td>
+
         <td></td>
       </tr>
     {{/each}}
@@ -220,12 +224,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', end
   </div>
 <div class="span3" id="addPromotion">
   <h3>Add promotion</h3>
-  <input type="text" id="name" placeholder="Name of promotional activity" />
-  <input type="text" id="description" placeholder="Description" />
-  <input type="text" id="price" type="number" placeholder="price" /><br />
-  <input type="text" id="submissionDate" placeholder="Leave blank to enter now" /><br />
+  <input type="text" id="name" value="Spotify blog promotion" placeholder="Name of promotional activity" />
+  <input type="text" id="description" value="Spotify blog promotion" placeholder="Description" />
+  <input type="text" id="price" value="0" type="number" placeholder="price" /><br />
+  <input type="text" id="submissionDate" value="2013-04-01" placeholder="Leave blank to enter now" /><br />
   <input type="text" id="promotionDate" placeholder="Leave blank to enter null" /><br />
-  <input type="text" id="code" placeholder="Refererrer code" /><br />
+  <input type="text" id="code" value="spotifyblog" placeholder="Refererrer code" /><br />
 
   <button id="submit" class="btn btn-primary">Add</button>
 </div>

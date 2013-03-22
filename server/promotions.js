@@ -19,7 +19,7 @@ console.log(this.userId);
 // Publish lockouts
 Meteor.publish('Promotions', function () {
   console.log('user id: 2' + this.userId);
-  return promotions.find({}, {sort: {submissionDate: -1, promotionDate: -1}});
+  return promotions.find({owner: this.userId}, {sort: {submissionDate: -1, promotionDate: -1}});
 });
 
 Meteor.methods({
@@ -30,6 +30,9 @@ Meteor.methods({
     console.log("Securing promotion " + data);
     promotions.update({code: data.code}, {$set: {promotionDate: new Date()}});
   },
+  'rejectPromotion': function (data) {
+    promotions.update({code: data.code}, {$set: {rejectedDate: new Date()}});
+  },
   'submitPromotion': function (data) {
     console.log(data);
     console.log('user id: ' + this.userId);
@@ -39,6 +42,7 @@ Meteor.methods({
       price: data.price,
       submissionDate: data.submissionDate,
       promotionDate: data.promotionDate,
+      rejectedDate: null,
       owner: this.userId,
       code: data.code
     });
