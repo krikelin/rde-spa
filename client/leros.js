@@ -1,26 +1,44 @@
 var lockouts = new Meteor.Collection('Lockouts');
-Meteor.startup(function () {
-    page('/test', function () {
-    });
-    Accounts.ui.config({
-passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL'
+
+function setSection(id) {
+  var d = document.querySelectorAll('.section');
+  console.log(d.length);
+  for(var i = 0; i < d.length; i++) {
+    console.log(d[i]);
+    if(d[i].getAttribute('id') == id) {
+      d[i].style.display = 'block';
+    } else {
+      d[i].style.display = 'none';
+    }
+  }
+  var items = document.querySelectorAll('.navbar li');
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    if(item.dataset['item'] == id) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }  
+  }
+}
+var LerosRoutes = Backbone.Router.extend({
+  routes: {
+    '' : 'home',
+    '*lockouts' : 'lockouts'
+  },
+  home: function () {
+    setSection('home');
+  },
+  lockouts: function () {
+    setSection('lockouts');
+  }
 });
-  Meteor.subscribe('Lockouts');
+var routers = new LerosRoutes();
+Meteor.startup(function () {
+  Backbone.history.start();
+
+  Accounts.ui.config({
+    passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL'
   });
-  Template.lockouts.lockouts = function () {
-      return lockouts.find({}, { sort: {startDate: 1}});
-  };
-  Template.lockouts.events({
-      'click .delete' : function (e, t) {
-        var id = e.target.id;
-        Meteor.call('removeLockout', {
-          id: id
-        });      
-      },
-      'click #submit' : function (e, t) {
-        Meteor.call('addLockout', { 
-          startDate: t.find('#startDate').value,
-          endDate: t.find('#endDate').value
-        });      
-      }
-  });
+});
+
