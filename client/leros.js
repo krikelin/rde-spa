@@ -26,7 +26,8 @@ var LerosRoutes = Backbone.Router.extend({
   routes: {
     '' : 'home',
     '!/lockouts' : 'lockouts',
-    '!/promotions' : 'promotions'
+    '!/promotions' : 'promotions',
+    '!/promotions/:code/secure': 'securePromotion'
   },
   home: function () {
     setSection('home');
@@ -36,6 +37,11 @@ var LerosRoutes = Backbone.Router.extend({
   },
   promotions: function () {
     setSection('promotions');
+  },
+  securePromotion: function (code) {
+    Session.set('code', code);
+    setSection('secure');
+    
   }
 });
 var routers = new LerosRoutes();

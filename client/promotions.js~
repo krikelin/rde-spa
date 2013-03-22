@@ -1,10 +1,20 @@
 var promotions = new Meteor.Collection('Promotions');
 Template.promotions.submissions = function () {
-    return promotions.find({promotionDate: null}, { sort: {submissionDate: 1}});
+    return promotions.find({promotionDate: null}, { sort: {submissionDate: -1}});
 };
 Template.promotions.promotions = function () {
-    return promotions.find({promotionDate: null}, { sort: {submissionDate: 1}});
+    return promotions.find({promotionDate: {$ne: null}}, { sort: {promotionDate: -1}});
 };
+Template.secure.code = function () {
+    return Session.get('code');
+};
+Template.secure.events({
+    'click .secure': function (e, t) {
+      Meteor.call('securePromotion', {
+        code: e.target.id
+      }); 
+    }
+});
 Template.promotions.events({
   'click .delete' : function (e, t) {
     var id = e.target.id;
@@ -25,12 +35,19 @@ Template.promotions.events({
     });      
   },
   'click #submit' : function (e, t) {
-    Meteor.call('submitPromotion', { 
-      submissionDate: new Date(),
+    var submissionDate = t.find('#submissionDate').value.length > 0 ? new Date(t.find('#submissionDate').value) : new Date();
+    var promotionDate = t.find('#promotionDate').value.length > 0 ? new Date(t.find('#promotionDate').value) : null;
+    console.log(submissionDate, promotionDate);
+    var data = { 
+      submissionDate: submissionDate,
+      promotionDate: promotionDate,
       name: t.find('#name').value,
       description: t.find('#description').value,
-      price: parseFloat(t.find('#price').value)
-    });      
+      price: parseFloat(t.find('#price').value),
+      code: t.find('#code').value
+    };
+    console.log(data);
+    Meteor.call('submitPromotion', data);      
   }
 });
 
