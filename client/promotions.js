@@ -17,6 +17,7 @@ Template.secure.events({
       Meteor.call('securePromotion', {
         code: e.target.id
       }); 
+      
     },
     'click .reject': function (e, t) {
       console.log('a');

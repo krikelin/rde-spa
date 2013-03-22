@@ -29,9 +29,30 @@ Meteor.methods({
   'securePromotion': function(data) {
     console.log("Securing promotion " + data);
     promotions.update({code: data.code}, {$set: {promotionDate: new Date()}});
+    var promotion = promotions.findOne({code: data.code});
+    var user = Meteor.users.findOne({_id: promotion.owner});
+    var email = user.emails[0].address;
+    console.log(user);
+    console.log(email);
+    Email.send({
+      from: 'noreply@leros.meteor.com',
+      to: email,
+      subject: data.code + ' promotion is now secured'
+    });
+    
   },
   'rejectPromotion': function (data) {
-    promotions.update({code: data.code}, {$set: {rejectedDate: new Date()}});
+    promotions.update({code: data.code}, {$set: {rejectedDate: new Date()}}); 
+    var promotion = promotions.findOne({code: data.code});
+    var user = Meteor.users.findOne({_id: promotion.owner});
+    var email = user.emails[0].address;
+    console.log(email);
+    Email.send({
+      from: 'noreply@leros.meteor.com',
+      to: email,
+      subject: 'We\'re sorry that promotion ' + data.code + 'has been rejected.'
+    });
+    
   },
   'submitPromotion': function (data) {
     console.log(data);
