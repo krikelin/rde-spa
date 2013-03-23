@@ -64,10 +64,10 @@ label, input, button {
 body {
   font-family: 'Tahoma';
   font-size: 11px;
-}
+}/*
 .table-striped tr:nth-child(2n) td {
   background-color: #EEEEEE;
-}
+}*/
 table {
   width: 75%;
 }

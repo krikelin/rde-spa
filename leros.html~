@@ -1,5 +1,6 @@
 <head>
   <title>leros</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/bootstrap.css" type="text/css" />
 </head>
 
@@ -161,36 +162,37 @@
   <label for="promotionDate">Promotion date</label>
   <input type="text" id="promotionDate"/>
   <label for="code">Coupon code</label>
-  <input type="text" id="code" value="spotifyblo"" /><br />
+  <input type="text" id="code" value="spotifyblog" /><br />
 
   <button id="submit" class="btn btn-primary">Add</button>
 </div>
 </template>
 <template name="lockouts">
-  <h1>My Lockouts</h1>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>   
-       <tr>
-          <th></th>
-          <th>Start date</th>
-          <th>End date</th>
-          <th>Delete</th>
-          <th></th>
+  <div class="span8">
+    <table class="table table-bordered table-striped table-condensed">
+      <thead>   
+         <tr>
+            <th></th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Delete</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    {{#each lockouts}}
+      <tr data-id="{{id}}">
+        <td></td>
+        <td>{{startDate}}</td>
+        <td>{{endDate}}</td>
+        <td><button class="btn btn-danger delete" id="{{_id}}">Delete</button></td>
+        <td></td>
       </tr>
-    </thead>
-    <tbody>
-  {{#each lockouts}}
-    <tr data-id="{{id}}">
-      <td></td>
-      <td>{{startDate}}</td>
-      <td>{{endDate}}</td>
-      <td><button class="btn btn-danger delete" id="{{_id}}">Delete</button></td>
-      <td></td>
-    </tr>
-  {{/each}}
-    </tbody>
-  </table>
-   <div id="addLockout">
+    {{/each}}
+      </tbody>
+    </table>
+  </div>
+   <div class="span4 well" id="addLockout">
     <input id="startDate" type="datetime" value="2013-03-27" placeholder="Start Date" />
     <input id="endDate" type="datetime" value="2013-04-03" placeholder="End Date" />
     <button id="submit" class="btn btn-primary">Add</button>
